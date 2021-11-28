@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/Diary.h
+string
+-
+utility
+-
+vector
+-
+time_controller.h
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/time_controller.h
+
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/main.cpp
+iostream
+-
+Diary.h
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/Diary.h
+
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/time_controller.h
+time.h
+-
+stdio.h
+-
+
