@@ -27,7 +27,7 @@ private:
     std::string diary_path;
     time_controller time_controller;
 
-    void add_task(const Task& task);
+    void add_task(const Task &task);
 
 public:
     explicit Diary(std::string path) {
@@ -39,6 +39,10 @@ public:
     void save_diary();
 
     void input_task();
+
+    void task_delete(const std::string& text);
+
+    void drop_task();
 
     static void print_task(std::vector<Task> target);
 

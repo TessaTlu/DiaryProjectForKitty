@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/Diary.cpp
+Diary.h
+/Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/Diary.h
+fstream
+-
+cstdlib
+-
+iostream
+-
+
 /Users/rasimgadziev/Desktop/study/cprj/DiaryProjectForKiity/Diary.h
 string
 -

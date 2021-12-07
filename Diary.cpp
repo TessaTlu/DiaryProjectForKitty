@@ -12,7 +12,7 @@ bool compare_by_time(const Task &a, const Task &b) {
 }
 
 void Diary::load_diary() {
-    std::cout<<"Производится чтение дневника и запись данных в оперативную память.."<<std::endl;
+    std::cout << "Производится чтение дневника и запись данных в оперативную память.." << std::endl;
     std::ifstream ip(this->diary_path);
     if (!ip.is_open()) std::cout << "ERROR: File Open" << '\n';
     std::vector<Task> data;
@@ -29,7 +29,7 @@ void Diary::load_diary() {
         dead_line = atoi(input_dead_line.c_str());
         getline(ip, input_done, '\n');
         done = atoi(input_done.c_str());
-        if (!dead_line){
+        if (!dead_line) {
             break;
         }
         data.push_back({
@@ -41,17 +41,17 @@ void Diary::load_diary() {
 
     ip.close();
     this->diary_array = data;
-    std::cout<<"Чтение прошло успешно!"<<std::endl;
+    std::cout << "Чтение прошло успешно!" << std::endl;
 
 }
 
 
 void Diary::save_diary() {
-    std::cout<<"Производится запись дневника из оперативной памяти в текстовый файл.."<<std::endl;
+    std::cout << "Производится запись дневника из оперативной памяти в текстовый файл.." << std::endl;
     std::ofstream out(this->diary_path);
     out << this->format_diary();
     out.close();
-    std::cout<<"Запись прошла успешно!"<<std::endl;
+    std::cout << "Запись прошла успешно!" << std::endl;
 }
 
 std::vector<Task> Diary::fetch_task_by_date(Date date) {
@@ -60,14 +60,15 @@ std::vector<Task> Diary::fetch_task_by_date(Date date) {
     for (auto &i: this->diary_array) {
         tm *i_datetime = time_controller::datetime_from_timestamp(i.dead_line);
         strftime(buffer, 160, "%d.%m.%Y %H:%M.", i_datetime);
-        if (i_datetime->tm_year + 1900 == date.year && i_datetime->tm_mday == date.day && i_datetime->tm_mon + 1 == date.month){
+        if (i_datetime->tm_year + 1900 == date.year && i_datetime->tm_mday == date.day &&
+            i_datetime->tm_mon + 1 == date.month) {
             target.push_back(i);
         }
     }
     return target;
 }
 
-void Diary::add_task(const Task& task) {
+void Diary::add_task(const Task &task) {
     this->diary_array.push_back(task);
 }
 
@@ -79,6 +80,7 @@ std::vector<Task> Diary::sort_task() {
     std::sort(target.begin(), target.end(), compare_by_time);
     return target;
 }
+
 
 void Diary::erase() {
     this->diary_array.clear();
@@ -125,7 +127,7 @@ void Diary::print_task(std::vector<Task> target) {
 
 std::string Diary::format_diary() {
     std::string target;
-    for (const auto& i: this->diary_array) {
+    for (const auto &i: this->diary_array) {
         target += i.text + "," + std::to_string(i.dead_line) + "," + std::to_string(i.done) + "\n";
     }
     return target;
@@ -141,8 +143,25 @@ void Diary::filter_by_date() {
     std::cout << "Введите день: ";
     std::cin >> day;
     print_task(this->fetch_task_by_date({
-        year,
-        month,
-        day
-    }));
+                                                year,
+                                                month,
+                                                day
+                                        }));
+}
+
+void Diary::task_delete(const std::string& text) {
+    std::vector<Task> target;
+    for (int i = 0; i < this->diary_array.size(); i ++){
+        if (this->diary_array[i].text == text) {
+            this->diary_array.erase(this->diary_array.begin() + i);
+        }
+    }
+}
+
+void Diary::drop_task() {
+    std::string text;
+    std::cout<<"Введите название задачи, которую нужно удалить"<<std::endl;
+    std::cin>>text;
+    this->task_delete(text);
+    std::cout<<"Успешно удалён элемент с именем - "<<text<<std::endl;
 }
